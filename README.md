@@ -1,113 +1,182 @@
-# 🧭 Simulador de Roteador com Tabela de Rotas Estáticas (Java)
 
-## 📘 Descrição do Projeto
-Este projeto é um **simulador de roteador** desenvolvido em **Java**, que lê uma tabela de rotas estáticas a partir de um arquivo JSON e determina a **melhor rota** para um IP de destino informado pelo usuário, utilizando o critério de **Longest Prefix Match**.
+# 🧭 Simulador de Roteador com Interface Web Estilo Cisco 🚀
 
----
-
-## 🎯 Objetivo
-Simular o processo de decisão de roteamento de um roteador real, de forma didática e modular, aplicando conceitos de redes e programação orientada a objetos.
+> Projeto acadêmico — Redes de Computadores  
+> Interface inspirada em equipamentos Cisco
 
 ---
 
-## ⚙️ Funcionalidades
-- Leitura da tabela de rotas a partir de `rotas.json`;
-- Conversão e comparação de endereços IP e máscaras de rede;
-- Determinação da melhor rota para um IP de destino;
-- Exibição do resultado no console;
-- Testes automáticos de rotas conhecidas.
+## 📘 Descrição Geral do Projeto
+
+O **Simulador de Roteador** é um sistema completo composto por:
+
+✅ **Backend Java com Spark** que simula o processo de roteamento  
+✅ **Algoritmo de Longest Prefix Match** para determinar o melhor caminho  
+✅ **Frontend React + Vite** com interface estilo **Cisco WebUI**  
+✅ Visualização da tabela de rotas estáticas  
+✅ Comunicação via API REST
+
+📌 Objetivo: Demonstrar de forma didática o funcionamento de roteadores reais.
 
 ---
 
-## FIGMA
-https://www.figma.com/proto/9AePkqgJ2QykQdHswYvaml/Untitled?node-id=3-4858&p=f&t=qmXfzF5SEQCVu6w4-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3%3A4858
+## 🧠 Funcionalidades do Sistema
 
+| Funcionalidade | Status |
+|---|:---:|
+| Consulta de melhor rota | ✅ |
+| Visualização da tabela de rotas | ✅ |
+| Interface Cisco-like | ✅ |
+| Tratamento de erros e validações | ✅ |
 
 ---
 
-## 🧩 Estrutura de Pastas
+## 🔌 Arquitetura do Sistema
 
-```
-/SimuladorRoteador
-│
-├── src/
-│   ├── app/
-│   │   └── Main.java              # Interação com o usuário
-│   ├── model/
-│   │   ├── Rota.java              # Estrutura de dados da rota
-│   │   └── TabelaRotas.java       # Leitura e armazenamento das rotas
-│   ├── service/
-│   │   └── RoteadorService.java   # Lógica de decisão da melhor rota
-│   ├── util/
-│   │   └── IPUtils.java           # Utilitários para manipulação de IP
-│   └── test/
-│       └── RoteadorTest.java      # Casos de teste
-│
-└── rotas.json                     # Arquivo com rotas estáticas
+```mermaid
+flowchart LR
+A[Frontend React + Vite] -- HTTP / JSON --> B[API Spark Java - Backend]
+B --> C[Arquivo rotas.json]
 ```
 
 ---
 
-## 🧠 Tecnologias Utilizadas
-- **Java 17+**
-- **Gson (Google)** — para leitura de arquivos JSON
-- **VS Code / IntelliJ IDEA / Eclipse** — ambiente de desenvolvimento
-- **GitHub** — versionamento do projeto
+## 📂 Estrutura do Projeto
+
+```
+SimuladorRoteador/
+│
+├── backend/
+│   ├── src/
+│   │   ├── app/Main.java
+│   │   ├── controller/RoteadorController.java
+│   │   ├── model/(Rota.java, TabelaRotas.java)
+│   │   ├── service/RoteadorService.java
+│   │   └── util/IPUtils.java
+│   └── rotas.json
+│
+└── frontend/
+    ├── src/
+    │   ├── App.jsx
+    │   ├── App.css
+    │   └── pages/(Roteamento.jsx, TabelaRotas.jsx, Sobre.jsx)
+    └── package.json
+```
 
 ---
 
-## 🧰 Como Executar o Projeto
+## 📡 API REST – Endpoints
 
-1. **Instale o JDK 17 ou superior**  
-2. **Clone ou extraia este projeto** em sua máquina  
-3. **Adicione a biblioteca Gson**  
-   - Via Maven (`pom.xml`):
-     ```xml
-     <dependency>
-       <groupId>com.google.code.gson</groupId>
-       <artifactId>gson</artifactId>
-       <version>2.10.1</version>
-     </dependency>
-     ```
-   - Ou manualmente, adicionando o arquivo `.jar` ao classpath.  
-4. Compile e execute a classe principal:
-   ```bash
-   javac app/Main.java
-   java app.Main
-   ```
-5. Insira um IP de destino para testar.
+| Método | Rota | Função |
+|---|---|---|
+| GET | `/api/rotas` | Lista todas as rotas |
+| GET | `/api/melhor-rota?ip=x.x.x.x` | Retorna a melhor rota |
 
----
-
-## 📄 Exemplo de `rotas.json`
+Exemplo de resposta:
 
 ```json
-[
-  {"rede": "192.168.0.0", "mascara": "255.255.255.0", "gateway": "192.168.0.1"},
-  {"rede": "10.0.0.0", "mascara": "255.0.0.0", "gateway": "10.0.0.1"},
-  {"rede": "172.16.0.0", "mascara": "255.240.0.0", "gateway": "172.16.0.1"}
-]
+{
+  "rede": "192.168.0.0",
+  "mascara": "255.255.255.0",
+  "gateway": "192.168.0.1"
+}
 ```
 
 ---
 
-## 👨‍💻 Divisão de Tarefas
+## ⚙️ Como Executar
 
-| Aluno | Função | Descrição |
-|--------|--------|-----------|
-| **Bruno** | 🧩 Estrutura e Definição do JSON | Criação do arquivo `rotas.json` e estrutura inicial do projeto. |
-| **Robson** | 📄 Leitura do Arquivo | Implementação da classe `TabelaRotas` com leitura via Gson. |
-| **Luiz** | 🔍 Cálculo da Melhor Rota | Lógica de decisão (Longest Prefix Match) em `RoteadorService`. |
-| **Matheus K.** | 🧪 Testes | Casos de teste e validação da saída do sistema. |
-| **Paulo** | ⚙️ Integração Final | Integração geral e revisão do projeto. |
-| **Matheus Luna** | 💬 Interface com o Usuário | Interação via console e exibição dos resultados. |
+🔹 **Backend**
+
+```bash
+cd backend
+javac -cp "lib/*;src" src/**/*.java
+java -cp "lib/*;src" app.Main
+```
+
+Servidor disponível em:
+
+👉 http://localhost:4567/
 
 ---
 
-## 📅 Marco 1 – Planejamento e Configuração
-✅ Documento de planejamento entregue  
-✅ Ambiente Java configurado  
-✅ Biblioteca Gson adicionada  
-✅ Código inicial (esqueleto) pronto e funcional  
+🔹 **Frontend**
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Acesso no navegador:
+
+👉 http://localhost:5173/
+
+---
+
+## 🧪 Testes sugeridos
+
+| Entrada | Resultado Esperado |
+|---|---|
+| `192.168.0.55` | Rota da rede `192.168.0.0/24` |
+| `10.1.2.3` | Rota `10.0.0.0/8` |
+| IP inválido | Mensagem de erro |
+
+---
+
+## 🎯 Longest Prefix Match (Resumo)
+
+O roteador compara o IP de destino com todas as redes conhecidas e escolhe a rota com **maior número de bits idênticos** após aplicar a máscara.
+
+✔ Garante que o pacote siga pela rota mais específica.
+
+---
+
+## 🖥️ Interface do Sistema
+
+> (Inserir prints após exportação)
+
+- Tela de Consulta de Rotas  
+- Tela de Tabela de Rotas  
+- Tela Sobre
+
+---
+
+## 👨‍💻 Créditos da Equipe
+
+| Integrante | Função |
+|---|---|
+| **Bruno** | Estrutura do JSON e início do projeto |
+| **Robson** | Leitura da tabela de rotas |
+| **Luiz** | Algoritmo LPM |
+| **Matheus K.** | Testes iniciais |
+| **Paulo** | Integração geral, Backend REST e Interface Web |
+| **Matheus Luna** | Interação com o usuário |
+
+---
+
+## ✅ Status Final do Projeto
+
+| Marco | Resultado |
+|---|:---:|
+| Planejamento e Configuração | ✅ |
+| Funcionalidade básica | ✅ |
+| Interface e recursos extras | ✅ |
+| Documentação e preparação da apresentação | ✅ |
+
+---
+
+## 🚀 Possíveis Melhorias Futuras
+
+- Inclusão de rotas dinâmicas (RIP/OSPF)
+- Testes automatizados das requisições
+- Interface com mais recursos visuais
+
+---
+
+# ✅ Conclusão
+
+✔ Projeto **100% funcional**, documentado e pronto para apresentação ✅  
+📡 Demonstra prática de conceitos essenciais de **roteamento em redes**
 
 ---
