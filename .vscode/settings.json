@@ -1,0 +1,19 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib/gson-2.10.1.jar",
+        "lib/itextpdf-5.5.13.3.jar",
+        "lib/javax.servlet-api-3.1.0.jar",
+        "lib/jetty-http-9.4.51.v20230217.jar",
+        "lib/jetty-io-9.4.51.v20230217.jar",
+        "lib/jetty-server-9.4.51.v20230217.jar",
+        "lib/jetty-servlet-9.4.51.v20230217.jar",
+        "lib/jetty-util-9.4.51.v20230217.jar",
+        "lib/slf4j-api-2.0.9.jar",
+        "lib/slf4j-simple-2.0.9.jar",
+        "lib/spark-core-2.9.4.jar",
+        "test-lib/**/*.jar"
+    ]
+}
