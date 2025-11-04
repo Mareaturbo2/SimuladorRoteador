@@ -13,6 +13,7 @@
         "backend\\lib\\jetty-util-9.4.51.v20230217.jar",
         "backend\\lib\\slf4j-api-2.0.9.jar",
         "backend\\lib\\slf4j-simple-2.0.9.jar",
-        "backend\\lib\\spark-core-2.9.4.jar"
+        "backend\\lib\\spark-core-2.9.4.jar",
+        "test-lib\\**\\*.jar"
     ]
 }
