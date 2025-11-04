@@ -22,6 +22,9 @@ Simular o processo de decisão de roteamento de um roteador real, de forma didá
 ## FIGMA
 https://www.figma.com/proto/9AePkqgJ2QykQdHswYvaml/Untitled?node-id=3-4858&p=f&t=qmXfzF5SEQCVu6w4-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=3%3A4858
 
+
+---
+
 ## 🧩 Estrutura de Pastas
 
 ```
